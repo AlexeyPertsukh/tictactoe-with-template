@@ -1,8 +1,5 @@
 package com.company.model;
 
-import com.company.model.Board;
-import com.company.model.Figure;
-
 public class Win {
     private Win() {
     }

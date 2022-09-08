@@ -23,7 +23,6 @@ public class Board {
         array[num] = figure;
     }
 
-
     public Figure get(int num) {
         return array[num];
     }

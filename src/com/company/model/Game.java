@@ -2,10 +2,10 @@ package com.company.model;
 
 public class Game {
 
-    private final Board board = new Board();
-    private final Figure figure1;
-    private final Figure figure2;
-    private Figure current;
+    protected final Board board = new Board();
+    protected final Figure figure1;
+    protected final Figure figure2;
+    protected Figure current;
 
     public Game(Figure figure1, Figure figure2) {
         this.figure1 = figure1;
