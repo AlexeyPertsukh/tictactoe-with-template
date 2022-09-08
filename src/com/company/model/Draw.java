@@ -1,10 +1,10 @@
-package com.company.controller;
+package com.company.model;
 
 import com.company.model.Board;
 import com.company.model.Figure;
 
-public class DrawController {
-    private DrawController() {
+public class Draw {
+    private Draw() {
     }
 
     public static boolean isDraw(Board board) {

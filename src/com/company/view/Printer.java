@@ -4,7 +4,7 @@ import com.company.model.Board;
 
 public interface Printer {
 
-    void print(Board board);
+    void printBoard(char[][] boardCharArray);
     void print(String string);
     void println(String string);
 }

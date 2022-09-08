@@ -40,4 +40,12 @@ public class Board {
         return out;
     }
 
+    public char[][] toCharArray() {
+        char[][] out = new char[SIDE][SIDE];
+        for (int i = 0; i < array.length; i++) {
+            out[i / SIDE][i % SIDE] = array[i].getChar();
+        }
+        return out;
+    }
+
 }

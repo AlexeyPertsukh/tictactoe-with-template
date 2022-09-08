@@ -2,13 +2,12 @@ package com.company.model;
 
 public class Game {
 
-    private final Board board;
+    private final Board board = new Board();
     private final Figure figure1;
     private final Figure figure2;
     private Figure current;
 
-    public Game(Board board, Figure figure1, Figure figure2) {
-        this.board = board;
+    public Game(Figure figure1, Figure figure2) {
         this.figure1 = figure1;
         this.figure2 = figure2;
         current = figure1;
@@ -16,10 +15,6 @@ public class Game {
 
     public Figure getCurrent() {
         return current;
-    }
-
-    public Board getBoard() {
-        return board;
     }
 
     public Figure other() {
@@ -38,4 +33,15 @@ public class Game {
         return current.getChar();
     }
 
+    public boolean isWin() {
+        return Win.isWin(board, current);
+    }
+
+    public boolean isDraw() {
+        return Draw.isDraw(board);
+    }
+
+    public char[][] boardCharArray() {
+        return board.toCharArray();
+    }
 }

@@ -1,9 +1,6 @@
 package com.company.controller;
 
-import com.company.model.Board;
-import com.company.model.Command;
-import com.company.model.Figure;
-import com.company.model.Game;
+import com.company.model.*;
 import com.company.view.Printer;
 import com.company.view.Reader;
 
@@ -12,9 +9,7 @@ public class GameController {
     private static final String GAME_OVER = "Game over";
 
     public void go(Game game, Printer printer, Reader reader) {
-        Board board = game.getBoard();
-
-        printer.print(board);
+        printer.printBoard(game.boardCharArray());
 
         while (true) {
             String message = String.format("Player %c, enter you move: ", game.getCurrentChar());
@@ -27,29 +22,21 @@ public class GameController {
                 continue;
             }
 
-            printer.print(board);
+            printer.printBoard(game.boardCharArray());
 
-            if (isWin(game)) {
+            if (game.isWin()) {
                 String winMessage = String.format("%s: Winner is %c", GAME_OVER, game.getCurrentChar());
                 printer.println(winMessage);
                 break;
             }
 
-            if(isDraw(game)) {
+            if(game.isDraw()) {
                 printer.println(GAME_OVER + ": draw");
                 break;
             }
 
             game.changeCurrent();
         }
-    }
-
-    private boolean isWin(Game game) {
-        return WinController.isWin(game.getBoard(), game.getCurrent());
-    }
-
-    private boolean isDraw(Game game) {
-        return DrawController.isDraw(game.getBoard());
     }
 
     private boolean move(Command command, Game game, Printer printer) {

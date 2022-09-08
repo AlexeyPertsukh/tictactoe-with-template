@@ -1,10 +1,10 @@
-package com.company.controller;
+package com.company.model;
 
 import com.company.model.Board;
 import com.company.model.Figure;
 
-public class WinController {
-    private WinController() {
+public class Win {
+    private Win() {
     }
 
     private static final int[] WINS = new int[]{

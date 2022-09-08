@@ -8,14 +8,15 @@ public class ConsolePrinter implements Printer {
     private static final String FORMAT = " %c ";
 
     @Override
-    public void print(Board board) {
-        int num = 0;
+    public void printBoard(char[][] boardCharArray) {
+        int num = 1;
         System.out.println();
-        for (int i = 0; i < Board.SIDE; i++) {
-            for (int j = 0; j < Board.SIDE; j++) {
-                Figure figure = board.get(num);
-
-                char ch = figure == Figure.NULL ? Character.forDigit(num + 1, 10) : figure.getChar();
+        for (int i = 0; i < boardCharArray.length; i++) {
+            for (int j = 0; j < boardCharArray[i].length; j++) {
+                char ch = boardCharArray[i][j];
+                if(ch == Figure.NULL.getChar()) {
+                    ch = Character.forDigit(num, 10);
+                }
                 System.out.printf(FORMAT, ch);
 
                 if (j < Board.SIDE - 1) {
