@@ -13,16 +13,12 @@ public class Game {
         current = figure1;
     }
 
-    public Figure getCurrent() {
-        return current;
-    }
-
-    public Figure other() {
-        return current == figure1 ? figure2 : figure1;
-    }
-
     public void changeCurrent() {
         current = other();
+    }
+
+    private Figure other() {
+        return current == figure1 ? figure2 : figure1;
     }
 
     public void move(int num) {
