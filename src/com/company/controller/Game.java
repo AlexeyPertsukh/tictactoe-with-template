@@ -41,12 +41,8 @@ public class Game {
             String input = reader.read();
             Command command = new Command(input);
 
-            if (!command.isMove()) {
-                printer.println("unknown command");
-                continue;
-            }
-
-            if(!move(command)) {
+            boolean moveResult = move(command);
+            if(!moveResult) {
                 continue;
             }
 
@@ -76,6 +72,12 @@ public class Game {
     }
 
     private boolean move(Command command) {
+
+        if (!command.isMove()) {
+            printer.println("illegal move command");
+            return false;
+        }
+
         int num = command.toInt() - 1;
         try {
             board.insert(num, current);
