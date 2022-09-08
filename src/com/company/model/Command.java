@@ -11,7 +11,7 @@ public class Command {
         return isInteger(string);
     }
 
-    public int moveAddress() {
+    public int toInt() {
         return Integer.parseInt(string);
     }
 

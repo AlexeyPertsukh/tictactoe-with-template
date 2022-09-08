@@ -1,6 +1,6 @@
-A simple implementation of the game of tic-tac-toe with a check of winnings through patterns
+A simple implementation of the game of tic-tac-toe with a check of winnings through templates
 ----
-With MVC
+- MVC
 
 ![alt text](Screenshot_1.jpg)
 

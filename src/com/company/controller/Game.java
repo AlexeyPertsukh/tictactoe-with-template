@@ -76,7 +76,7 @@ public class Game {
     }
 
     private boolean move(Command command) {
-        int num = command.moveAddress() - 1;
+        int num = command.toInt() - 1;
         try {
             board.insert(num, current);
             return true;
