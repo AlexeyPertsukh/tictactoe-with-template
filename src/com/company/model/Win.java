@@ -1,10 +1,8 @@
 package com.company.model;
 
-public class Win {
-    private Win() {
-    }
+interface Win {
 
-    private static final int[] WINS = new int[]{
+    int[] WINS = new int[]{
             0b000_000_000_111,
             0b000_000_111_000,
             0b000_111_000_000,
@@ -17,7 +15,7 @@ public class Win {
             0b000_001_010_100,
     };
 
-    public static boolean isWin(Board board, Figure figure) {
+     default boolean isWin(Board board, Figure figure) {
         int num = board.toInt(figure);
         for (int template : WINS) {
             int check = num & template;

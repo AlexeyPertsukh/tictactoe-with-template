@@ -1,10 +1,8 @@
 package com.company.model;
 
-public class Draw {
-    private Draw() {
-    }
+interface Draw {
 
-    public static boolean isDraw(Board board) {
+    default boolean isDraw(Board board) {
         return board.toInt(Figure.NULL) == 0;
     }
 }

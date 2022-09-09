@@ -1,6 +1,6 @@
 package com.company.model;
 
-public class Game {
+public class Game implements Win, Draw {
 
     protected final Board board = new Board();
     protected final Figure figure1;
@@ -30,11 +30,11 @@ public class Game {
     }
 
     public boolean isWin() {
-        return Win.isWin(board, current);
+        return isWin(board, current);
     }
 
     public boolean isDraw() {
-        return Draw.isDraw(board);
+        return isDraw(board);
     }
 
     public char[][] boardCharArray() {
