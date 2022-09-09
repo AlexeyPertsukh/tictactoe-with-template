@@ -17,7 +17,7 @@ public class Board {
             throw new IllegalArgumentException("illegal cell address");
         }
 
-        if (get(num) != Figure.NULL) {
+        if (!get(num).isNull()) {
             throw new IllegalArgumentException("you can't go to this cell, it's busy");
         }
         array[num] = figure;

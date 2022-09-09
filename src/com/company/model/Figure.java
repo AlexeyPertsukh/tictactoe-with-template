@@ -14,4 +14,8 @@ public enum Figure {
     public char getChar() {
         return ch;
     }
+
+    public boolean isNull() {
+        return this == NULL;
+    }
 }
