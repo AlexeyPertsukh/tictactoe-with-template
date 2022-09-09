@@ -41,4 +41,5 @@ public class ConsolePrinter implements Printer {
     public void println(String string) {
         System.out.println(string);
     }
+
 }
