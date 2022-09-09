@@ -1,11 +1,12 @@
 package com.company.model;
 
-public class Game implements Win, Draw {
+public class Game implements Win {
 
     protected final Board board = new Board();
     protected final Figure figure1;
     protected final Figure figure2;
     protected Figure current;
+    private final Rule rule = new Rule();
 
     public Game(Figure figure1, Figure figure2) {
         this.figure1 = figure1;
@@ -30,14 +31,29 @@ public class Game implements Win, Draw {
     }
 
     public boolean isWin() {
-        return isWin(board, current);
+        return rule.isWin(board, current);
     }
 
     public boolean isDraw() {
-        return isDraw(board);
+        return rule.isDraw(board);
     }
 
     public char[][] boardCharArray() {
         return board.toCharArray();
     }
+
+    private static class Rule implements Win, Draw {
+
+        @Override
+        public boolean isWin(Board board, Figure figure) {
+            return Win.super.isWin(board, figure);
+        }
+
+        @Override
+        public boolean isDraw(Board board) {
+            return Draw.super.isDraw(board);
+        }
+
+    }
+
 }

@@ -16,6 +16,5 @@ public class Main {
         Reader reader = new ConsoleReader();
         GameController gameController = new GameController();
         gameController.go(game, printer, reader);
-
     }
 }

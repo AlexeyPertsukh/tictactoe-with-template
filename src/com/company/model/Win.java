@@ -2,7 +2,7 @@ package com.company.model;
 
 interface Win {
 
-    int[] WINS = new int[]{
+    int[] WIN_TEMPLATES = new int[]{
             0b000_000_000_111,
             0b000_000_111_000,
             0b000_111_000_000,
@@ -17,7 +17,7 @@ interface Win {
 
      default boolean isWin(Board board, Figure figure) {
         int num = board.toInt(figure);
-        for (int template : WINS) {
+        for (int template : WIN_TEMPLATES) {
             int check = num & template;
             if (check == template) {
                 return true;
