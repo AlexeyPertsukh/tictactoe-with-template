@@ -38,7 +38,7 @@ class Win {
             }
         }
 
-        throw new IllegalArgumentException("winning line not found");
+        throw new GameException("winning line not found");
     }
 
 }

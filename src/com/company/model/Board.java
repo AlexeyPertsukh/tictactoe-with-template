@@ -14,11 +14,11 @@ public class Board {
     public void insert(int num, Figure figure) {
 
         if (num < 0 || num >= array.length) {
-            throw new IllegalArgumentException("illegal cell address");
+            throw new GameException("illegal cell address");
         }
 
         if (!get(num).isNull()) {
-            throw new IllegalArgumentException("you can't go to this cell, it's busy");
+            throw new GameException("you can't go to this cell, it's busy");
         }
         array[num] = figure;
     }

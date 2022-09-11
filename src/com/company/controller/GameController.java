@@ -51,7 +51,7 @@ public class GameController {
         try {
             game.move(num);
             return true;
-        } catch (IllegalArgumentException e) {
+        } catch (GameException e) {
             printer.println(e.getMessage());
             return false;
         }
