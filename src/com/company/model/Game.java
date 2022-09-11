@@ -37,6 +37,10 @@ public class Game {
         return Draw.isDraw(board);
     }
 
+    public int winLine() {
+        return Win.winLine(board, current);
+    }
+
     public char[][] boardCharArray() {
         return board.toCharArray();
     }

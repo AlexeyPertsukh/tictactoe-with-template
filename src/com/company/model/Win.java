@@ -28,4 +28,17 @@ class Win {
         }
         return false;
     }
+
+    public static int winLine(Board board, Figure figure) {
+        int num = board.toInt(figure);
+        for (int template : WIN_TEMPLATES) {
+            int check = num & template;
+            if (check == template) {
+                return template;
+            }
+        }
+
+        throw new IllegalArgumentException("winning line not found");
+    }
+
 }

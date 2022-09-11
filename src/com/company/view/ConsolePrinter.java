@@ -5,19 +5,29 @@ import com.company.model.Figure;
 
 public class ConsolePrinter implements Printer {
 
-    private static final String FORMAT = " %c ";
+    private static final String BASIC_FORMAT = " %c ";
+    private static final String WIN_FORMAT = "<%c>";
 
     @Override
     public void printBoard(char[][] boardCharArray) {
+        printBoard(boardCharArray, 0);
+    }
+
+    @Override
+    public void printBoard(char[][] boardCharArray, int winLine) {
         int num = 1;
+        int mask = 1;
         System.out.println();
         for (int i = 0; i < boardCharArray.length; i++) {
             for (int j = 0; j < boardCharArray[i].length; j++) {
                 char ch = boardCharArray[i][j];
-                if(ch == Figure.NULL.getChar()) {
+                if (ch == Figure.NULL.getChar()) {
                     ch = Character.forDigit(num, 10);
                 }
-                System.out.printf(FORMAT, ch);
+                String format = (winLine & mask) == 0 ? BASIC_FORMAT : WIN_FORMAT;
+                mask = mask << 1;
+
+                System.out.printf(format, ch);
 
                 if (j < Board.SIDE - 1) {
                     System.out.print("|");

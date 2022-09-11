@@ -22,13 +22,14 @@ public class GameController {
                 continue;
             }
 
-            printer.printBoard(game.boardCharArray());
-
             if (game.isWin()) {
+                printer.printBoard(game.boardCharArray(), game.winLine());
                 String winMessage = String.format("%s: Winner is %c", GAME_OVER, game.getCurrentChar());
                 printer.println(winMessage);
                 break;
             }
+
+            printer.printBoard(game.boardCharArray());
 
             if(game.isDraw()) {
                 printer.println(GAME_OVER + ": draw");
