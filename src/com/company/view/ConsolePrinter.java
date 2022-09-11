@@ -24,7 +24,7 @@ public class ConsolePrinter implements Printer {
                 if (ch == Figure.NULL.getChar()) {
                     ch = Character.forDigit(num, 10);
                 }
-                String format = (winLine & mask) == 0 ? BASIC_FORMAT : WIN_FORMAT;
+                String format = getFormat(winLine, mask);
                 mask = mask << 1;
 
                 System.out.printf(format, ch);
@@ -40,6 +40,10 @@ public class ConsolePrinter implements Printer {
             }
         }
         System.out.println();
+    }
+
+    private static String getFormat(int winLine, int mask) {
+        return (winLine & mask) == 0 ? BASIC_FORMAT : WIN_FORMAT;
     }
 
     @Override
