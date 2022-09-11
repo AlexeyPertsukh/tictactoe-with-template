@@ -3,26 +3,26 @@ package com.company.model;
 public class Game {
 
     protected final Board board = new Board();
-    protected final Figure figure1;
-    protected final Figure figure2;
-    protected Figure current;
+    protected final Player player1;
+    protected final Player player2;
+    protected Player current;
 
-    public Game(Figure figure1, Figure figure2) {
-        this.figure1 = figure1;
-        this.figure2 = figure2;
-        current = figure1;
+    public Game(Player player1, Player player2) {
+        this.player1 = player1;
+        this.player2 = player2;
+        current = player1;
     }
 
     public void changeCurrent() {
         current = other();
     }
 
-    private Figure other() {
-        return current == figure1 ? figure2 : figure1;
+    private Player other() {
+        return current == player1 ? player2 : player1;
     }
 
     public void move(int num) {
-        board.insert(num, current);
+        board.insert(num, current.getFigure());
     }
 
     public char getCurrentChar() {
@@ -30,7 +30,7 @@ public class Game {
     }
 
     public boolean isWin() {
-        return Win.isWin(board, current);
+        return Win.isWin(board, current.getFigure());
     }
 
     public boolean isDraw() {
@@ -38,7 +38,7 @@ public class Game {
     }
 
     public int winLine() {
-        return Win.winLine(board, current);
+        return Win.winLine(board, current.getFigure());
     }
 
     public char[][] boardCharArray() {
