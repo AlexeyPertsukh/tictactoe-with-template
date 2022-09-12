@@ -45,4 +45,20 @@ public class Game {
         return board.toCharArray();
     }
 
+    public int getFreeMoves() {
+        return board.toInt(Figure.NULL);
+    }
+
+    public int getCurrentMoves() {
+        return board.toInt(current.getFigure());
+    }
+
+    public int getOtherMoves() {
+        return board.toInt(other().getFigure());
+    }
+
+
+    public Player getCurrent() {
+        return current;
+    }
 }

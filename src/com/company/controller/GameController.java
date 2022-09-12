@@ -14,8 +14,11 @@ public class GameController {
         while (true) {
             String message = String.format("Player %c, enter you move: ", game.getCurrentChar());
             printer.print(message);
-            String input = reader.read();
-            Command command = new Command(input);
+
+            Command command = inputCommand(game, reader);
+            if(checkCurrentPlayerIsBot(game)) {
+                printer.println(command.getValue());
+            }
 
             boolean moveResult = move(command, game, printer);
             if(!moveResult) {
@@ -55,6 +58,22 @@ public class GameController {
             printer.println(e.getMessage());
             return false;
         }
+    }
+
+    private Command inputCommand(Game game, Reader reader) {
+        String input;
+        if(checkCurrentPlayerIsBot(game)) {
+            Bot bot = (Bot) game.getCurrent();
+            input = bot.getMove(game.getFreeMoves(), game.getCurrentMoves(), game.getOtherMoves());
+        } else {
+            input = reader.read();
+        }
+
+        return new Command(input);
+    }
+
+    private boolean checkCurrentPlayerIsBot(Game game) {
+        return game.getCurrent() instanceof Bot;
     }
 
 }

@@ -1,18 +1,18 @@
 package com.company.model;
 
 public class Command {
-    private final String string;
+    private final String value;
 
-    public Command(String string) {
-        this.string = string;
+    public Command(String value) {
+        this.value = value;
     }
 
     public boolean isMove() {
-        return isInteger(string);
+        return isInteger(value);
     }
 
     public int toInt() {
-        return Integer.parseInt(string);
+        return Integer.parseInt(value);
     }
 
     private static boolean isInteger(String string) {
@@ -24,4 +24,7 @@ public class Command {
         }
     }
 
+    public String getValue() {
+        return value;
+    }
 }
