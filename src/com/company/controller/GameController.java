@@ -64,7 +64,7 @@ public class GameController {
         String input;
         if(checkCurrentPlayerIsBot(game)) {
             Bot bot = (Bot) game.getCurrent();
-            input = bot.getMove(game.getFreeMoves(), game.getCurrentMoves(), game.getOtherMoves());
+            input = bot.getMove(game.getMoves());
         } else {
             input = reader.read();
         }

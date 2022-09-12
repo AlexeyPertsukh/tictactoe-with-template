@@ -45,20 +45,16 @@ public class Game {
         return board.toCharArray();
     }
 
-    public int getFreeMoves() {
-        return board.toInt(Figure.NULL);
-    }
-
-    public int getCurrentMoves() {
-        return board.toInt(current.getFigure());
-    }
-
-    public int getOtherMoves() {
-        return board.toInt(other().getFigure());
-    }
-
-
     public Player getCurrent() {
         return current;
     }
+
+    public Moves getMoves() {
+        int freeMoves = board.toInt(Figure.NULL);
+        int currentMoves = board.toInt(current.getFigure());
+        int otherMoves = board.toInt(other().getFigure());
+
+        return new Moves(freeMoves, currentMoves, otherMoves);
+    }
+
 }

@@ -8,8 +8,8 @@ public class Bot extends Player{
         this.ai = ai;
     }
 
-    public String getMove(int free, int myMoves, int enemyMoves) {
-        return ai.getMove(free, myMoves, enemyMoves);
+    public String getMove(Moves moves) {
+        return ai.getMove(moves);
     }
 
 }
