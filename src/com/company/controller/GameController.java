@@ -12,7 +12,7 @@ public class GameController {
         printer.printBoard(game.boardCharArray());
 
         while (true) {
-            String message = String.format("Player %c, enter you move: ", game.getCurrentChar());
+            String message = String.format("Player %s, enter you move: ", game.getCurrentName());
             printer.print(message);
 
             Command command = inputCommand(game, reader);
@@ -27,7 +27,7 @@ public class GameController {
 
             if (game.isWin()) {
                 printer.printBoard(game.boardCharArray(), game.winLine());
-                String winMessage = String.format("%s: Winner is %c", GAME_OVER, game.getCurrentChar());
+                String winMessage = String.format("%s: Winner is %s", GAME_OVER, game.getCurrentName());
                 printer.println(winMessage);
                 break;
             }
@@ -64,7 +64,8 @@ public class GameController {
         String input;
         if(checkCurrentPlayerIsBot(game)) {
             Bot bot = (Bot) game.getCurrent();
-            input = bot.getMove(game.getMoves());
+            Moves moves = game.getMoves();
+            input = bot.getMove(moves);
         } else {
             input = reader.read();
         }

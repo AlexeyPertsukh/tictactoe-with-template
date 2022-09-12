@@ -11,7 +11,8 @@ public class Player {
         return figure;
     }
 
-    public char getChar() {
-        return figure.getChar();
+    public String getName() {
+        return String.valueOf(figure.getChar());
     }
+
 }

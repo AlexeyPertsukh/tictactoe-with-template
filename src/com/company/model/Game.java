@@ -25,8 +25,8 @@ public class Game {
         board.insert(num, current.getFigure());
     }
 
-    public char getCurrentChar() {
-        return current.getChar();
+    public String getCurrentName() {
+        return current.getName();
     }
 
     public boolean isWin() {

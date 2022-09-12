@@ -23,4 +23,5 @@ public class AiRandomMove implements Ai{
         int move = possibleMoves.get(0);
         return String.valueOf(move);
     }
+
 }

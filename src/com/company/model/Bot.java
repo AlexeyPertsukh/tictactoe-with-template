@@ -12,4 +12,8 @@ public class Bot extends Player{
         return ai.getMove(moves);
     }
 
+    @Override
+    public String getName() {
+        return super.getName() + "[bot]";
+    }
 }

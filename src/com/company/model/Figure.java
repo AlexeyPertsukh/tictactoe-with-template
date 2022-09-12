@@ -3,7 +3,7 @@ package com.company.model;
 public enum Figure {
     NULL(' '),
     X('X'),
-    ZERO('0');
+    ZERO('O');
 
     private final char ch;
 
