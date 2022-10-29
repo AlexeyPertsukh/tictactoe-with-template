@@ -1,12 +1,11 @@
-package com.company.model.rules;
+package com.company.controller.rules;
 
 import com.company.model.Board;
 import com.company.model.Figure;
-import com.company.model.exception.GameException;
 
-public class Win {
+public class UniversalWinController {
 
-    private Win() {
+    private UniversalWinController() {
     }
 
     private static final int[] WIN_TEMPLATES = new int[]{
@@ -22,19 +21,11 @@ public class Win {
             0b000_001_010_100,
     };
 
-     public static boolean isWin(Board board, Figure figure) {
-        int num = board.toInt(figure);
-        for (int template : WIN_TEMPLATES) {
-            int check = num & template;
-            if (check == template) {
-                return true;
-            }
-        }
-        return false;
+     public static boolean isWin(int binaryBoardRepresentationConcretePlayer) {
+        return winLine(binaryBoardRepresentationConcretePlayer) != 0;
     }
 
-    public static int winLine(Board board, Figure figure) {
-        int num = board.toInt(figure);
+    public static int winLine(int num) {
         for (int template : WIN_TEMPLATES) {
             int check = num & template;
             if (check == template) {
@@ -42,7 +33,7 @@ public class Win {
             }
         }
 
-        throw new GameException("winning line not found");
+        return 0;
     }
 
 }

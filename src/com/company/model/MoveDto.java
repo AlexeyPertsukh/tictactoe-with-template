@@ -1,13 +1,13 @@
 package com.company.model;
 
-public class Moves {
+public class MoveDto {
     public final int free;
-    public final int current;
+    public final int my;
     public final int other;
 
-    public Moves(int free, int my, int enemy) {
+    public MoveDto(int free, int my, int enemy) {
         this.free = free;
-        this.current = my;
+        this.my = my;
         this.other = enemy;
     }
 }

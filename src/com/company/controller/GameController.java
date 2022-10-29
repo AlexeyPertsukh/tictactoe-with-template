@@ -3,7 +3,7 @@ package com.company.controller;
 import com.company.model.*;
 import com.company.model.Command;
 import com.company.model.exception.GameException;
-import com.company.model.player.Bot;
+import com.company.model.player.BotPlayer;
 import com.company.view.Printer;
 import com.company.view.Reader;
 
@@ -11,6 +11,7 @@ public class GameController {
 
     private static final String GAME_OVER = "Game over";
 
+    // TODO reader, printer to class GameView
     public void go(Game game, Printer printer, Reader reader) {
         printer.printBoard(game.boardCharArray());
 
@@ -18,13 +19,15 @@ public class GameController {
             String message = String.format("Player %s, enter you move: ", game.getCurrentName());
             printer.print(message);
 
+            // TODO change to int getMove(), delete class Command
             Command command = inputCommand(game, reader);
             if(checkCurrentPlayerIsBot(game)) {
                 printer.println(command.getValue());
             }
 
-            if(command.isEnd()) {
-                break;
+            if (!command.isMove()) {
+                printer.println("illegal move command");
+                continue;
             }
 
             boolean moveResult = move(command, game, printer);
@@ -50,29 +53,26 @@ public class GameController {
         }
     }
 
+    // TODO remove Printer from move()
     private boolean move(Command command, Game game, Printer printer) {
 
-        if (!command.isMove()) {
-            printer.println("illegal move command");
-            return false;
-        }
-
-        int num = command.toInt() - 1;
+        int num = command.getMove() - 1;
         try {
             game.move(num);
             return true;
         } catch (GameException e) {
-            printer.println(e.getMessage());
+            printer.println(e.getMessage());    // TODO тут не должен печатать
             return false;
         }
     }
 
+    // TODO создать класс PlayerController который будет сам определять бот или человек и получать от него следующий ход
     private Command inputCommand(Game game, Reader reader) {
         String input;
         if(checkCurrentPlayerIsBot(game)) {
-            Bot bot = (Bot) game.getCurrent();
-            Moves moves = game.getMoves();
-            input = bot.nextMove(moves);
+            BotPlayer botPlayer = (BotPlayer) game.getCurrentPlayer();
+            MoveDto moveDto = game.getMoveDto();
+            input = botPlayer.nextMove(moveDto);
         } else {
             input = reader.read();
         }
@@ -81,7 +81,7 @@ public class GameController {
     }
 
     private boolean checkCurrentPlayerIsBot(Game game) {
-        return game.getCurrent() instanceof Bot;
+        return game.getCurrentPlayer() instanceof BotPlayer;
     }
 
 }

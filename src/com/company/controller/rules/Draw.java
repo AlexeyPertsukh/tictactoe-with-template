@@ -1,4 +1,4 @@
-package com.company.model.rules;
+package com.company.controller.rules;
 
 import com.company.model.Board;
 import com.company.model.Figure;
@@ -9,6 +9,6 @@ public class Draw {
     }
 
     public static boolean isDraw(Board board) {
-        return board.toInt(Figure.NULL) == 0;
+        return board.figureMovesInBits(Figure.NULL) == 0;
     }
 }

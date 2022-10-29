@@ -2,6 +2,7 @@ package com.company.model;
 
 public class Command {
     private static final String END = "end";
+    private static final String HELP = "?";
     private final String value;
 
     public Command(String value) {
@@ -16,7 +17,11 @@ public class Command {
         return value.equalsIgnoreCase(END);
     }
 
-    public int toInt() {
+    public boolean isHelp() {
+        return value.equalsIgnoreCase(HELP);
+    }
+
+    public int getMove() {
         return Integer.parseInt(value);
     }
 
