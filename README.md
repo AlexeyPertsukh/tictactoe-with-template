@@ -1,7 +1,3 @@
-A simple implementation of the game of tic-tac-toe with a check of winnings through templates
-----
-- MVC
+Стерли хрень и пишем:
 
-![alt text](Screenshot_1.jpg)
-
-![alt text](Screenshot_2.jpg)
+Testing Pool request from FORK.
