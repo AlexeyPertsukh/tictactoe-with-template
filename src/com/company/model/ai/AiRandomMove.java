@@ -1,4 +1,6 @@
-package com.company.model;
+package com.company.model.ai;
+
+import com.company.model.Moves;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +9,7 @@ import java.util.List;
 public class AiRandomMove implements Ai{
 
     @Override
-    public String getMove(Moves moves) {
+    public String nextMove(Moves moves) {
         List<Integer> possibleMoves = new ArrayList<>();
         int num = 1;
         int free = moves.free;

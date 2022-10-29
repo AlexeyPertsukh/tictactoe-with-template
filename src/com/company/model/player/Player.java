@@ -1,4 +1,6 @@
-package com.company.model;
+package com.company.model.player;
+
+import com.company.model.Figure;
 
 public class Player {
     private final Figure figure;

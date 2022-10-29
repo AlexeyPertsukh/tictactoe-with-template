@@ -1,6 +1,10 @@
-package com.company.model;
+package com.company.model.rules;
 
-class Win {
+import com.company.model.Board;
+import com.company.model.Figure;
+import com.company.model.exception.GameException;
+
+public class Win {
 
     private Win() {
     }

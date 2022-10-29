@@ -1,6 +1,9 @@
 package com.company.controller;
 
 import com.company.model.*;
+import com.company.model.Command;
+import com.company.model.exception.GameException;
+import com.company.model.player.Bot;
 import com.company.view.Printer;
 import com.company.view.Reader;
 
@@ -18,6 +21,10 @@ public class GameController {
             Command command = inputCommand(game, reader);
             if(checkCurrentPlayerIsBot(game)) {
                 printer.println(command.getValue());
+            }
+
+            if(command.isEnd()) {
+                break;
             }
 
             boolean moveResult = move(command, game, printer);
@@ -65,7 +72,7 @@ public class GameController {
         if(checkCurrentPlayerIsBot(game)) {
             Bot bot = (Bot) game.getCurrent();
             Moves moves = game.getMoves();
-            input = bot.getMove(moves);
+            input = bot.nextMove(moves);
         } else {
             input = reader.read();
         }

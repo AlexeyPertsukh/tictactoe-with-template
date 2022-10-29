@@ -1,6 +1,9 @@
 package com.company.controller;
 
 import com.company.model.*;
+import com.company.model.ai.AiRandomMove;
+import com.company.model.player.Bot;
+import com.company.model.player.Player;
 import com.company.view.ConsolePrinter;
 import com.company.view.ConsoleReader;
 import com.company.view.Printer;

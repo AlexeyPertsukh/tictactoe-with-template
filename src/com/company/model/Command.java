@@ -1,6 +1,7 @@
 package com.company.model;
 
 public class Command {
+    private static final String END = "end";
     private final String value;
 
     public Command(String value) {
@@ -9,6 +10,10 @@ public class Command {
 
     public boolean isMove() {
         return isInteger(value);
+    }
+
+    public boolean isEnd() {
+        return value.equalsIgnoreCase(END);
     }
 
     public int toInt() {
@@ -23,6 +28,7 @@ public class Command {
             return false;
         }
     }
+
 
     public String getValue() {
         return value;

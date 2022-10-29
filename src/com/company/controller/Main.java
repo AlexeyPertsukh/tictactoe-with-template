@@ -2,7 +2,7 @@ package com.company.controller;
 
 import com.company.model.Figure;
 import com.company.model.Game;
-import com.company.model.Player;
+import com.company.model.player.Player;
 import com.company.view.ConsolePrinter;
 import com.company.view.ConsoleReader;
 import com.company.view.Printer;

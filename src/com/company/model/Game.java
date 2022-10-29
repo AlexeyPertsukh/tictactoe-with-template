@@ -1,5 +1,9 @@
 package com.company.model;
 
+import com.company.model.player.Player;
+import com.company.model.rules.Draw;
+import com.company.model.rules.Win;
+
 public class Game {
 
     protected final Board board = new Board();

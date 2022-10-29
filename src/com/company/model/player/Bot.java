@@ -1,4 +1,8 @@
-package com.company.model;
+package com.company.model.player;
+
+import com.company.model.Figure;
+import com.company.model.Moves;
+import com.company.model.ai.Ai;
 
 public class Bot extends Player{
     private final Ai ai;
@@ -8,8 +12,8 @@ public class Bot extends Player{
         this.ai = ai;
     }
 
-    public String getMove(Moves moves) {
-        return ai.getMove(moves);
+    public String nextMove(Moves moves) {
+        return ai.nextMove(moves);
     }
 
     @Override

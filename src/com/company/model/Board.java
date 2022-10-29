@@ -1,5 +1,7 @@
 package com.company.model;
 
+import com.company.model.exception.GameException;
+
 import java.util.Arrays;
 
 public class Board {

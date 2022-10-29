@@ -1,6 +1,9 @@
-package com.company.model;
+package com.company.model.rules;
 
-class Draw {
+import com.company.model.Board;
+import com.company.model.Figure;
+
+public class Draw {
 
     private Draw() {
     }
