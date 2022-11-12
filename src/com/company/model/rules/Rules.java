@@ -1,12 +1,6 @@
-package com.company.controller.rules;
+package com.company.model.rules;
 
-import com.company.model.Board;
-import com.company.model.Figure;
-
-public class UniversalWinController {
-
-    private UniversalWinController() {
-    }
+public class Rules {
 
     private static final int[] WIN_TEMPLATES = new int[]{
             0b000_000_000_111,
@@ -21,19 +15,23 @@ public class UniversalWinController {
             0b000_001_010_100,
     };
 
-     public static boolean isWin(int binaryBoardRepresentationConcretePlayer) {
-        return winLine(binaryBoardRepresentationConcretePlayer) != 0;
+    public boolean isWin(int bitsPlayerMoves) {
+        return winLine(bitsPlayerMoves) != 0;
     }
 
-    public static int winLine(int num) {
+    public int winLine(int bitsPlayerMoves) {
         for (int template : WIN_TEMPLATES) {
-            int check = num & template;
+            int check = bitsPlayerMoves & template;
             if (check == template) {
                 return template;
             }
         }
 
         return 0;
+    }
+
+    public boolean isDraw(int bitsFreeMoves) {
+        return bitsFreeMoves == 0;
     }
 
 }

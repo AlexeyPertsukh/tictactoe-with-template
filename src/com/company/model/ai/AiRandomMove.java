@@ -1,6 +1,6 @@
-package com.company.controller.ai;
+package com.company.model.ai;
 
-import com.company.model.MoveDto;
+import com.company.model.Moves;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,10 +10,10 @@ public class AiRandomMove implements Ai{
 
     // TODO refactor to return int
     @Override
-    public String getNextPosition(MoveDto moveDto) {
+    public int nextMove(Moves moves) {
         List<Integer> possibleMoves = new ArrayList<>();
         int num = 1;
-        int free = moveDto.free;
+        int free = moves.free;
         while (free > 0) {
             if ((free & 1) != 0) {
                 possibleMoves.add(num);
@@ -24,8 +24,7 @@ public class AiRandomMove implements Ai{
 
         Collections.shuffle(possibleMoves);
         int move = possibleMoves.get(0);
-        // TODO try stream realization
-        return String.valueOf(move);
+        return move;
     }
 
 }

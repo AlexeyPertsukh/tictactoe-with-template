@@ -1,26 +1,29 @@
-package com.company.model;
+package com.company.model.board;
 
+import com.company.model.Figure;
 import com.company.model.exception.GameException;
 
 import java.util.Arrays;
 
 public class Board {
     public static final int SIDE = 3;
+    private final Figure emptyFigure;
 
     protected final Figure[] array = new Figure[SIDE * SIDE];
 
-    public Board() {
-        Arrays.fill(array, Figure.NULL);
+    public Board(Figure emptyFigure) {
+        this.emptyFigure = emptyFigure;
+        Arrays.fill(array, emptyFigure);
     }
 
     public void insert(int position, Figure figure) {
 
         if (position < 0 || position >= array.length) {
-            throw new GameException("illegal cell address");
+            throw new GameException("illegal address");
         }
 
         if (!get(position).isNull()) {
-            throw new GameException("you can't go to this cell, it's busy");
+            throw new GameException("you can't go to this address, it's busy");
         }
         array[position] = figure;
     }
@@ -29,9 +32,11 @@ public class Board {
         return array[num];
     }
 
-    // TODO move to BoardController
-    // TODO rename better
-    public int figureMovesInBits(Figure figure) {
+    public Figure getEmptyFigure() {
+        return emptyFigure;
+    }
+
+    public int bitesOf(Figure figure) {
         int out = 0;
         int mask = 1;
         for (Figure value : array) {

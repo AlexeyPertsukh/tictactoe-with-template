@@ -1,12 +1,8 @@
-package com.company.controller.rules;
+package easy;
 
-import com.company.model.Board;
-import com.company.model.Figure;
-import com.company.model.exception.GameException;
+public class EasyRules {
 
-public class WinController {
-
-    private WinController() {
+    private EasyRules() {
     }
 
     private static final int[] WIN_TEMPLATES = new int[]{
@@ -22,20 +18,23 @@ public class WinController {
             0b000_001_010_100,
     };
 
-     public static boolean isWin(Board board, Figure figure) {
-        return winLine(board, figure) != 0;
+     public static boolean isWin(int binaryPlayerMoves) {
+        return winLine(binaryPlayerMoves) != 0;
     }
 
-    public static int winLine(Board board, Figure figure) {
-        int num = board.figureMovesInBits(figure);
+    public static int winLine(int binaryPlayerMoves) {
         for (int template : WIN_TEMPLATES) {
-            int check = num & template;
+            int check = binaryPlayerMoves & template;
             if (check == template) {
                 return template;
             }
         }
 
         return 0;
+    }
+
+    public static boolean isDraw(int binaryFreeMoves) {
+        return (binaryFreeMoves & 0b111_111_111) == 0;
     }
 
 }

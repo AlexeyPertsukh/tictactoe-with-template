@@ -1,8 +1,8 @@
 package com.company.model.player;
 
 import com.company.model.Figure;
-import com.company.model.MoveDto;
-import com.company.controller.ai.Ai;
+import com.company.model.Moves;
+import com.company.model.ai.Ai;
 
 public class BotPlayer extends Player {
     private final Ai ai;
@@ -12,8 +12,8 @@ public class BotPlayer extends Player {
         this.ai = ai;
     }
 
-    public String nextMove(MoveDto moveDto) {
-        return ai.getNextPosition(moveDto);
+    public int nextMove(Moves moves) {
+        return ai.nextMove(moves);
     }
 
     @Override

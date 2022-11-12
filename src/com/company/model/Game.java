@@ -1,12 +1,12 @@
 package com.company.model;
 
+import com.company.model.board.Board;
 import com.company.model.player.Player;
-import com.company.controller.rules.Draw;
-import com.company.controller.rules.WinController;
+import com.company.model.rules.RulesWithBoard;
 
 public class Game {
 
-    protected final Board board = new Board();
+    protected final Board board = new Board(Figure.NULL);
     protected final Player player1;
     protected final Player player2;
     protected Player currentPlayer;
@@ -21,38 +21,38 @@ public class Game {
         currentPlayer = otherPlayer();
     }
 
-    // TODO move to game controller
     private Player otherPlayer() {
         return currentPlayer == player1 ? player2 : player1;
     }
 
-    // TODO move to game controller
     public void move(int num) {
         board.insert(num, currentPlayer.getFigure());
     }
 
-    public String getCurrentName() {
+    public String getCurrentPlayerName() {
         return currentPlayer.getName();
     }
 
-    // TODO move to game controller
+    public Board getBoard() {
+        return board;
+    }
+
     public boolean isWin() {
-        return WinController.isWin(board, currentPlayer.getFigure());
+        RulesWithBoard rules = new RulesWithBoard();
+        return rules.isWin(board, currentPlayer.getFigure());
     }
 
-    // TODO move to game controller
     public int winLine() {
-        return WinController.winLine(board, currentPlayer.getFigure());
+        RulesWithBoard rules = new RulesWithBoard();
+        return rules.winLine(board, currentPlayer.getFigure());
     }
 
-    // TODO move to game controller
     public boolean isDraw() {
-        return Draw.isDraw(board);
+        RulesWithBoard rules = new RulesWithBoard();
+        return rules.isDraw(board);
     }
 
-    // TODO getBoard()
-
-    public char[][] boardCharArray() {
+    public char[][] boardChars() {
         return board.toCharArray();
     }
 
@@ -60,15 +60,13 @@ public class Game {
         return currentPlayer;
     }
 
-    public MoveDto getMoveDto() {
-        int freeMoves = board.figureMovesInBits(Figure.NULL);
-        int currentMoves = board.figureMovesInBits(currentPlayer.getFigure());
-        int otherMoves = board.figureMovesInBits(otherPlayer().getFigure());
+    public Moves getMoves() {
+        int freeMoves = board.bitesOf(Figure.NULL);
+        int currentMoves = board.bitesOf(currentPlayer.getFigure());
+        int otherMoves = board.bitesOf(otherPlayer().getFigure());
 
-        return new MoveDto(freeMoves, currentMoves, otherMoves);
+        return new Moves(freeMoves, currentMoves, otherMoves);
     }
-
-
 
 
 }

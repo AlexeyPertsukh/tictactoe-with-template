@@ -1,87 +1,85 @@
 package com.company.controller;
 
 import com.company.model.*;
-import com.company.model.Command;
 import com.company.model.exception.GameException;
 import com.company.model.player.BotPlayer;
-import com.company.view.Printer;
-import com.company.view.Reader;
+import com.company.view.View;
 
 public class GameController {
 
     private static final String GAME_OVER = "Game over";
+    private final Game game;
+    private final View view;
 
-    // TODO reader, printer to class GameView
-    public void go(Game game, Printer printer, Reader reader) {
-        printer.printBoard(game.boardCharArray());
+    public GameController(Game game, View view) {
+        this.game = game;
+        this.view = view;
+    }
+
+    public void go() {
+        view.showBoard(boardChars());
 
         while (true) {
-            String message = String.format("Player %s, enter you move: ", game.getCurrentName());
-            printer.print(message);
+            try{
+                view.showPromptEnterMove(game.getCurrentPlayerName());
 
-            // TODO change to int getMove(), delete class Command
-            Command command = inputCommand(game, reader);
-            if(checkCurrentPlayerIsBot(game)) {
-                printer.println(command.getValue());
+                int move = nextMove();
+
+                makeMove(move);
+
+                if (game.isWin()) {
+                    view.showBoard(boardChars(), game.winLine());
+                    view.showWin(game.getCurrentPlayerName());
+                    break;
+                }
+
+                view.showBoard(boardChars());
+
+                if (game.isDraw()) {
+                    view.showDraw();
+                    break;
+                }
+
+                game.changeCurrent();
+            } catch (GameException e) {
+                view.showErrorMessage(e.getMessage());
             }
 
-            if (!command.isMove()) {
-                printer.println("illegal move command");
-                continue;
-            }
-
-            boolean moveResult = move(command, game, printer);
-            if(!moveResult) {
-                continue;
-            }
-
-            if (game.isWin()) {
-                printer.printBoard(game.boardCharArray(), game.winLine());
-                String winMessage = String.format("%s: Winner is %s", GAME_OVER, game.getCurrentName());
-                printer.println(winMessage);
-                break;
-            }
-
-            printer.printBoard(game.boardCharArray());
-
-            if(game.isDraw()) {
-                printer.println(GAME_OVER + ": draw");
-                break;
-            }
-
-            game.changeCurrent();
         }
     }
 
-    // TODO remove Printer from move()
-    private boolean move(Command command, Game game, Printer printer) {
-
-        int num = command.getMove() - 1;
-        try {
-            game.move(num);
-            return true;
-        } catch (GameException e) {
-            printer.println(e.getMessage());    // TODO тут не должен печатать
-            return false;
-        }
+    private void makeMove(int move) {
+        int num = move - 1;
+        game.move(num);
     }
 
-    // TODO создать класс PlayerController который будет сам определять бот или человек и получать от него следующий ход
-    private Command inputCommand(Game game, Reader reader) {
-        String input;
-        if(checkCurrentPlayerIsBot(game)) {
-            BotPlayer botPlayer = (BotPlayer) game.getCurrentPlayer();
-            MoveDto moveDto = game.getMoveDto();
-            input = botPlayer.nextMove(moveDto);
+    private int nextMove() {
+        if (game.getCurrentPlayer() instanceof BotPlayer bot) {
+            return bot.nextMove(game.getMoves());
         } else {
-            input = reader.read();
+            String s = view.read();
+            try {
+                return Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                throw new GameException("Illegal input");
+            }
         }
 
-        return new Command(input);
     }
 
-    private boolean checkCurrentPlayerIsBot(Game game) {
-        return game.getCurrentPlayer() instanceof BotPlayer;
+    private char[][] boardChars() {
+        char[][] out = game.boardChars();
+        for (int i = 0; i < out.length; i++) {
+            for (int j = 0; j < out[i].length; j++) {
+                if(out[i][j] == game.getBoard().getEmptyFigure().getChar()) {
+                    char numChar = (char)('1' + i * out.length + j);
+                    out[i][j] = numChar;
+                }
+            }
+        }
+        return out;
     }
+
+
 
 }
